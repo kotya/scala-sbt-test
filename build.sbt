@@ -14,6 +14,8 @@ lazy val root = (project in file(".")).
 
 //         
 
+scalaVersion := "2.11.11"
+sbtVersion := "0.13.16"
 
 lazy val `scala-sbt-test` = project in file(".")
 
@@ -23,7 +25,8 @@ name := "scala-sbt-test"
 homepage := Some(url("https://github.com/kotya/scala-sbt-test"))
 licenses := Seq("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0"))
 
-crossSbtVersions := Vector("0.13.17", "1.0.4")
+crossScalaVersions := Vector("2.11.11", "2.12.6")
+crossSbtVersions := Vector("0.13.16", "1.1.5")
 sbtPlugin := true
 
 publishMavenStyle := true
@@ -64,13 +67,14 @@ scalacOptions in (Compile, doc) ++= {
 
 libraryDependencies ++= Seq("org.specs2" %% "specs2-core" % "3.9.1" % "test")
 libraryDependencies ++= Seq("org.scalatest" %% "scalatest" % "3.0.5" % "test")
+// libraryDependencies += "org.scala-sbt" % "scripted-plugin" % sbtVersion.value
 
 // Scripted
-scriptedSettings
+/*scriptedSettings
 scriptedLaunchOpts := {
   scriptedLaunchOpts.value ++ Seq("-Xmx1024M", "-XX:MaxPermSize=256M", "-Dplugin.version=" + version.value)
 }
-scriptedBufferLog := false
+scriptedBufferLog := false*/
 
 // Bintray
 //bintrayOrganization := Some("kotyanaik")
