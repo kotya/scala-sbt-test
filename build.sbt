@@ -1,4 +1,4 @@
-import Dependencies._
+/*import Dependencies._
 
 lazy val root = (project in file(".")).
   settings(
@@ -10,7 +10,7 @@ lazy val root = (project in file(".")).
     name := "scala-sbt-test",
     libraryDependencies += scalaTest % Test
   )
-
+*/
 
 //         
 
@@ -59,6 +59,7 @@ scalacOptions in (Compile, doc) ++= {
 }
 
 libraryDependencies ++= Seq("org.specs2" %% "specs2-core" % "3.9.1" % "test")
+libraryDependencies ++= Seq("org.scalatest" %% "scalatest" % "3.0.5" % "test")
 
 // Scripted
 scriptedSettings
