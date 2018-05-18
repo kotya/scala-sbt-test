@@ -30,10 +30,26 @@ crossSbtVersions := Vector("0.13.16", "1.1.5")
 sbtPlugin := true
 
 publishMavenStyle := true
+publishArtifact in Test := false
 pomIncludeRepository := { _ => false }
-publishTo := Some(Resolver.file("file",  new File( "D:/Data/.ivy2/releases" )) )
+publishTo := Some(Resolver.file("file",  new File( "D:/Data/.ivy2/releases" )))
 
-scalacOptions += "-deprecation"
+/*publishTo := {
+  val nexus = "https://oss.sonatype.org/"
+  if (isSnapshot.value)
+    Some("snapshots" at nexus + "content/repositories/snapshots")
+  else
+    Some("releases" at nexus + "service/local/staging/deploy/maven2")
+}*/
+
+/*lazy val root = project.in(file(".")).configs(IntegrationTest)
+Defaults.itSettings*/
+
+// initialCommands := "import io.github.kotya.package._"
+
+scalacOptions := Seq("-unchecked", "-feature", "-deprecation", "-encoding", "utf8")
+
+// resolvers += Resolver.jcenterRepo
 
 val unusedWarnings = Seq("-Ywarn-unused-import")
 
@@ -101,5 +117,3 @@ releaseProcess := Seq[ReleaseStep](
   commitNextVersion,
   pushChanges
 )
-
-
