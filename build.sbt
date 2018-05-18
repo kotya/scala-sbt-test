@@ -25,7 +25,11 @@ licenses := Seq("Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0"
 
 crossSbtVersions := Vector("0.13.17", "1.0.4")
 sbtPlugin := true
-publishMavenStyle := false
+
+publishMavenStyle := true
+pomIncludeRepository := { _ => false }
+publishTo := Some(Resolver.file("file",  new File( "D:/Data/.ivy2/releases" )) )
+
 scalacOptions += "-deprecation"
 
 val unusedWarnings = Seq("-Ywarn-unused-import")
@@ -69,10 +73,10 @@ scriptedLaunchOpts := {
 scriptedBufferLog := false
 
 // Bintray
-bintrayOrganization := Some("sbt")
-bintrayRepository := "sbt-plugin-releases"
-bintrayPackage := "scala-sbt-test"
-bintrayReleaseOnPublish := false
+//bintrayOrganization := Some("kotyanaik")
+//bintrayRepository := "sbt-plugin-releases"
+//bintrayPackage := "scala-sbt-test"
+//bintrayReleaseOnPublish := false
 
 // Release
 import ReleaseTransformations._
@@ -80,11 +84,13 @@ releaseProcess := Seq[ReleaseStep](
   checkSnapshotDependencies,
   inquireVersions,
   runClean,
+  runTest,
   //releaseStepCommandAndRemaining("^ test"),
   //releaseStepCommandAndRemaining("^ scripted"),
   setReleaseVersion,
   commitReleaseVersion,
   tagRelease,
+	publishArtifacts,
   //releaseStepCommandAndRemaining("^ publishSigned"),
   //releaseStepTask(bintrayRelease in `scala-sbt-test`),
   setNextVersion,
